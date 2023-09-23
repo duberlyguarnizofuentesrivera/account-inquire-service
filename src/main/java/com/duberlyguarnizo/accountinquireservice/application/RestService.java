@@ -74,7 +74,7 @@ public class RestService {
    * @return the original TransactionCreationDto object
    * @throws TransactionPersistenceException if there was an error while saving the transaction
    */
-  public TransactionCreationDto createTransaction(TransactionCreationDto dto) {
+  public String createTransaction(TransactionCreationDto dto) {
     var transactionFromDto = Transaction.builder()
             .transactionType(TransactionType.valueOf(dto.getTransactionType().name()))
             .currentBalance(dto.getCurrentBalance())
@@ -90,7 +90,7 @@ public class RestService {
     if (transaction == null) {
       throw new TransactionPersistenceException("There was an error while saving");
     }
-    return dto;
+    return transaction.getId();
 
   }
 }

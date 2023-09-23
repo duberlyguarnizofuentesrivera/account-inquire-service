@@ -16,6 +16,7 @@ paths:
         required: true
         schema:
           type: string
+          format: uuid
 
     get:
       operationId: getBalanceByAccountId
@@ -34,6 +35,7 @@ paths:
         required: true
         schema:
           type: string
+          format: uuid
 
     get:
       operationId: getAccountTransactionHistory
@@ -43,7 +45,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TransactionHistoryElementDto'
+                type: array
+                items:
+                  $ref: '#/components/schemas/TransactionHistoryElementDto'
   /transactions:
     post:
       operationId: createTransaction
@@ -58,7 +62,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TransactionCreationDto'
+                type: string
+                format: uuid
 
 components:
   schemas:
