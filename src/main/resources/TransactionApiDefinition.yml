@@ -1,0 +1,124 @@
+openapi: 3.0.3
+info:
+  title: Transactions Service
+  description: Transactions Service
+  version: 1.0.0
+  contact:
+    name: Duberly Guarnizo
+    url: 'https://duberlyguarnizo.com'
+servers:
+  - url: 'https://localhost:8080'
+paths:
+  /transactions/balance/{accountId}:
+    parameters:
+      - name: accountId
+        in: path
+        required: true
+        schema:
+          type: string
+
+    get:
+      operationId: getBalanceByAccountId
+      responses:
+        200:
+          description: Successful Operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionBalanceDto'
+
+  /transactions/history/{accountId}:
+    parameters:
+      - name: accountId
+        in: path
+        required: true
+        schema:
+          type: string
+
+    get:
+      operationId: getAccountTransactionHistory
+      responses:
+        200:
+          description: Successful Operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionHistoryElementDto'
+  /transactions:
+    post:
+      operationId: createTransaction
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransactionCreationDto'
+      responses:
+        201:
+          description: Transaction created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionCreationDto'
+
+components:
+  schemas:
+    TransactionBalanceDto:
+      properties:
+        totalTransactions:
+          type: integer
+        avgBalance:
+          type: number
+          format: double
+
+    TransactionHistoryElementDto:
+      properties:
+        originAccountId:
+          type: string
+          format: uuid
+        destinationAccountId:
+          type: string
+          format: uuid
+        amount:
+          type: number
+          format: double
+        transactionType:
+          enum:
+            - deposit
+            - withdrawal
+            - payment
+            - card_expense
+        createdInstant:
+          type: string
+          format: date-time
+
+    TransactionCreationDto:
+      properties:
+        originAccountId:
+          type: string
+          format: uuid
+        destinationAccountId:
+          type: string
+          format: uuid
+        amount:
+          type: number
+          format: double
+        currentBalance:
+          type: number
+          format: double
+        monthlyTransactionCount:
+          type: integer
+        transactionType:
+          enum:
+            - deposit
+            - withdrawal
+            - payment
+            - card_expense
+        clientType:
+          enum:
+            - regular
+            - corporate
+        clientSpecialType:
+          enum:
+            - non_passive_client
+            - vip_client
+            - pyme_client
