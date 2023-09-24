@@ -8,6 +8,11 @@ import com.duberlyguarnizo.accountinquireservice.domain.model.Transaction;
 import com.duberlyguarnizo.accountinquireservice.infrastructure.persistence.TransactionEntity;
 
 public class TransactionMapper {
+  private TransactionMapper() {
+    // Private constructor... this class has only static methods.
+    throw new IllegalStateException("This is a utility class... must not be instantiated.");
+  }
+
   public static TransactionEntity toDbEntity(Transaction model) {
     return TransactionEntity.builder()
             .id(model.getId())

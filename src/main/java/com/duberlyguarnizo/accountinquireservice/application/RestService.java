@@ -56,15 +56,15 @@ public class RestService {
    * @return A list of TransactionHistoryElementDto objects representing the transaction history.
    */
   public List<TransactionHistoryElementDto> getTransactionHistory(UUID accountId) {
-    return service.getTransactionsByAccountId(accountId).stream().map(tr -> {
-      return TransactionHistoryElementDto.builder()
-              .amount(tr.getAmount())
-              .createdInstant(OffsetDateTime.from(tr.getCreatedInstant()))
-              .destinationAccountId(tr.getDestinationAccountId())
-              .transactionType(TransactionHistoryElementDto.TransactionTypeEnum.valueOf(
-                      tr.getTransactionType().name()))
-              .build();
-    }).collect(Collectors.toList());
+    return service.getTransactionsByAccountId(accountId).stream().map(tr ->
+            TransactionHistoryElementDto.builder()
+                    .amount(tr.getAmount())
+                    .createdInstant(OffsetDateTime.from(tr.getCreatedInstant()))
+                    .destinationAccountId(tr.getDestinationAccountId())
+                    .transactionType(TransactionHistoryElementDto.TransactionTypeEnum.valueOf(
+                            tr.getTransactionType().name()))
+                    .build()
+    ).collect(Collectors.toList());
   }
 
   /**

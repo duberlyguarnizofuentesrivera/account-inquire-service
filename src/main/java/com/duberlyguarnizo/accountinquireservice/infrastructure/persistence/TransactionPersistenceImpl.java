@@ -7,17 +7,21 @@ package com.duberlyguarnizo.accountinquireservice.infrastructure.persistence;
 import com.duberlyguarnizo.accountinquireservice.domain.model.Transaction;
 import com.duberlyguarnizo.accountinquireservice.domain.repository.TransactionPersistence;
 import com.duberlyguarnizo.accountinquireservice.infrastructure.TransactionMapper;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+/**
+ * This class implements the TransactionPersistence interface and provides the implementation
+ * for persisting and retrieving Transaction objects from the database.
+ */
 @Component
-@RequiredArgsConstructor
-public class TransactionRepositoryImpl implements TransactionPersistence {
-  private final TransactionRepository repository;
+public class TransactionPersistenceImpl implements TransactionPersistence {
+
+  private TransactionRepository repository;
 
   @Override
   public Transaction save(Transaction transaction) {
@@ -49,5 +53,10 @@ public class TransactionRepositoryImpl implements TransactionPersistence {
   @Override
   public void deleteById(String id) {
     repository.deleteById(id);
+  }
+
+  @Autowired
+  public void setRepository(TransactionRepository repository) {
+    this.repository = repository;
   }
 }
