@@ -11,7 +11,8 @@ package com.duberlyguarnizo.accountinquireservice.enums;
  * have a passive account in the bank) and they both can be VIP clients.
  */
 public enum ClientSpecialType {
+  NONE,
   NON_PASSIVE_CLIENT,
-  VIP_CLIENT,
-  PYME_CLIENT
+  PYME_CLIENT,
+  VIP_CLIENT
 }
