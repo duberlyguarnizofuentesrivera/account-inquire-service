@@ -10,6 +10,7 @@ import com.duberlyguarnizo.accountinquireservice.enums.ClientType;
 import com.duberlyguarnizo.accountinquireservice.enums.TransactionType;
 import java.time.Instant;
 import java.util.UUID;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.ToString;
@@ -24,13 +25,14 @@ import lombok.ToString;
 @Data
 @ToString
 @Builder
+@AllArgsConstructor
 @DomainModel
 public class Transaction {
   private String id;
   private UUID originAccountId;
   private UUID destinationAccountId;
-  private double currentBalance;
-  private Double amount;
+  private double currentOriginAccountBalance;
+  private Double transactionAmount;
   private Integer monthlyTransactionCount;
   private TransactionType transactionType;
   private ClientType clientType;

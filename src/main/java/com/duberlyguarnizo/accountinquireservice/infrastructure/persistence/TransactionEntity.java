@@ -11,9 +11,8 @@ import java.time.Instant;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -22,10 +21,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * The TransactionEntity class represents a transaction entity.
  * It is used to store information about a transaction in the database.
  */
-@Setter
-@Getter
+
+@Data
 @Builder
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Document("transactions")

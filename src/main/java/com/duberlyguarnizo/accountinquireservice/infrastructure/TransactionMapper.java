@@ -16,7 +16,7 @@ import com.duberlyguarnizo.accountinquireservice.infrastructure.persistence.Tran
  * <li>Conversion of Transaction model objects to TransactionEntity objects.</li>
  * <li>Conversion of TransactionEntity objects to Transaction model objects.</li>
  */
-public class TransactionMapper {
+public final class TransactionMapper {
   private TransactionMapper() {
     // Private constructor... this class has only static methods.
     throw new IllegalStateException("This is a utility class... must not be instantiated.");
@@ -32,13 +32,13 @@ public class TransactionMapper {
   public static TransactionEntity toDbEntity(Transaction model) {
     return TransactionEntity.builder()
             .id(model.getId())
-            .amount(model.getAmount())
+            .amount(model.getTransactionAmount())
             .transactionType(model.getTransactionType())
             .originAccountId(model.getOriginAccountId())
             .destinationAccountId(model.getDestinationAccountId())
             .createdInstant(model.getCreatedInstant())
             .monthlyTransactionCount(model.getMonthlyTransactionCount())
-            .currentBalance(model.getCurrentBalance())
+            .currentBalance(model.getCurrentOriginAccountBalance())
             .clientType(model.getClientType())
             .clientSpecialType(model.getClientSpecialType())
             .build();
@@ -53,12 +53,12 @@ public class TransactionMapper {
   public static Transaction toModel(TransactionEntity dbEntity) {
     return Transaction.builder()
             .id(dbEntity.getId())
-            .amount(dbEntity.getAmount())
+            .transactionAmount(dbEntity.getAmount())
             .transactionType(dbEntity.getTransactionType())
             .originAccountId(dbEntity.getOriginAccountId())
             .destinationAccountId(dbEntity.getDestinationAccountId())
             .monthlyTransactionCount(dbEntity.getMonthlyTransactionCount())
-            .currentBalance(dbEntity.getCurrentBalance())
+            .currentOriginAccountBalance(dbEntity.getCurrentBalance())
             .clientType(dbEntity.getClientType())
             .clientSpecialType(dbEntity.getClientSpecialType())
             .createdInstant(dbEntity.getCreatedInstant())

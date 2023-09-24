@@ -54,10 +54,10 @@ class TransactionMapperTest {
 
     transaction = Transaction.builder()
             .id(defaultId)
-            .amount(defaultAmount)
+            .transactionAmount(defaultAmount)
             .originAccountId(originId)
             .destinationAccountId(destinationId)
-            .currentBalance(defaultBalance)
+            .currentOriginAccountBalance(defaultBalance)
             .monthlyTransactionCount(5)
             .createdInstant(Instant.now())
             .transactionType(randomTransactionType)

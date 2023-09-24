@@ -9,17 +9,20 @@ import com.duberlyguarnizo.accountinquireservice.domain.repository.TransactionPe
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 /**
  * The TransactionService class provides methods for retrieving, saving, and deleting transactions.
  * Its main purpose is to create a link between the application and domain layers.
  */
-@RequiredArgsConstructor
+
 @Service
 public class TransactionService {
   private final TransactionPersistence persistence;
+
+  public TransactionService(TransactionPersistence persistence) {
+    this.persistence = persistence;
+  }
 
   public List<Transaction> getAllTransactions() {
     return persistence.findAll();

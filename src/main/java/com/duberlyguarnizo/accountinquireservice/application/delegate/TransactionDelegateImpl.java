@@ -13,7 +13,6 @@ import com.duberlyguarnizo.accountinquireservice.application.request.Transaction
 import java.net.URI;
 import java.util.List;
 import java.util.UUID;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
@@ -23,10 +22,14 @@ import org.springframework.stereotype.Component;
  * It provides methods for retrieving transaction balance, transaction history,
  * and creating transactions.
  */
-@RequiredArgsConstructor
+
 @Component
 public class TransactionDelegateImpl implements TransactionsApiDelegate {
   private final RestService service;
+
+  public TransactionDelegateImpl(RestService service) {
+    this.service = service;
+  }
 
   /**
    * GET /transactions/balance/{accountId}.

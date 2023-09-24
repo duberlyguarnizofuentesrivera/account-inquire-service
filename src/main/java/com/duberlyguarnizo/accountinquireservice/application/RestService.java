@@ -18,7 +18,6 @@ import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 /**
@@ -26,10 +25,14 @@ import org.springframework.stereotype.Service;
  * entities related to transactions. These methods are to be used by the controllers
  * via the ApiDelegate implementation.
  */
-@RequiredArgsConstructor
+
 @Service
 public class RestService {
   private final TransactionService service;
+
+  public RestService(TransactionService service) {
+    this.service = service;
+  }
 
   /**
    * Retrieves the balance and total number of transactions for a given account ID.
@@ -42,7 +45,7 @@ public class RestService {
     double avgBalance;
     var transactionList = service.getTransactionsByAccountId(accountId);
     avgBalance = transactionList.stream()
-            .mapToDouble(Transaction::getCurrentBalance).average().orElse(Double.NaN);
+            .mapToDouble(Transaction::getCurrentOriginAccountBalance).average().orElse(Double.NaN);
     return TransactionBalanceDto.builder()
             .totalTransactions(transactionList.size())
             .avgBalance(avgBalance)
@@ -58,7 +61,7 @@ public class RestService {
   public List<TransactionHistoryElementDto> getTransactionHistory(UUID accountId) {
     return service.getTransactionsByAccountId(accountId).stream().map(tr ->
             TransactionHistoryElementDto.builder()
-                    .amount(tr.getAmount())
+                    .amount(tr.getTransactionAmount())
                     .createdInstant(OffsetDateTime.from(tr.getCreatedInstant()))
                     .destinationAccountId(tr.getDestinationAccountId())
                     .transactionType(TransactionHistoryElementDto.TransactionTypeEnum.valueOf(
@@ -77,13 +80,13 @@ public class RestService {
   public String createTransaction(TransactionCreationDto dto) {
     var transactionFromDto = Transaction.builder()
             .transactionType(TransactionType.valueOf(dto.getTransactionType().name()))
-            .currentBalance(dto.getCurrentBalance())
+            .currentOriginAccountBalance(dto.getCurrentBalance())
             .clientSpecialType(ClientSpecialType.valueOf(dto.getClientSpecialType().name()))
             .clientType(ClientType.valueOf(dto.getClientType().name()))
             .monthlyTransactionCount(dto.getMonthlyTransactionCount())
             .originAccountId(dto.getOriginAccountId())
             .destinationAccountId(dto.getDestinationAccountId())
-            .amount(dto.getAmount())
+            .transactionAmount(dto.getAmount())
             .createdInstant(Instant.now())
             .build();
     var transaction = service.saveTransaction(transactionFromDto);
