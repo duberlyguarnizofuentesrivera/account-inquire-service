@@ -4,6 +4,9 @@
 
 package com.duberlyguarnizo.accountinquireservice.infrastructure.configuration;
 
+/**
+ * This class will define configuration beans.
+ */
 public class InfrastructureConfiguration {
 
 }

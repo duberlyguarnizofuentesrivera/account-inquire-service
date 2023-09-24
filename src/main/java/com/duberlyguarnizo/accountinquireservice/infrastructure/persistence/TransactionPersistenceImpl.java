@@ -7,18 +7,19 @@ package com.duberlyguarnizo.accountinquireservice.infrastructure.persistence;
 import com.duberlyguarnizo.accountinquireservice.domain.model.Transaction;
 import com.duberlyguarnizo.accountinquireservice.domain.repository.TransactionPersistence;
 import com.duberlyguarnizo.accountinquireservice.infrastructure.TransactionMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
 
 /**
  * This class implements the TransactionPersistence interface and provides the implementation
  * for persisting and retrieving Transaction objects from the database.
  */
-@Component
+@Repository
 public class TransactionPersistenceImpl implements TransactionPersistence {
 
   private TransactionRepository repository;

@@ -13,13 +13,13 @@ import com.duberlyguarnizo.accountinquireservice.enums.ClientSpecialType;
 import com.duberlyguarnizo.accountinquireservice.enums.ClientType;
 import com.duberlyguarnizo.accountinquireservice.enums.TransactionType;
 import com.duberlyguarnizo.accountinquireservice.exception.TransactionPersistenceException;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 /**
  * The RestService  is responsible for performing conversion between DTOs and domain

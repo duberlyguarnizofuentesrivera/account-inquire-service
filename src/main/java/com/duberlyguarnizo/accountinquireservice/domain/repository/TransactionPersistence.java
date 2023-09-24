@@ -9,6 +9,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+/**
+ * Interface representing persistence operations for transactions.
+ */
+
 public interface TransactionPersistence {
   Transaction save(Transaction transaction);
 

@@ -10,20 +10,26 @@ import com.duberlyguarnizo.accountinquireservice.application.dto.TransactionCrea
 import com.duberlyguarnizo.accountinquireservice.application.dto.TransactionHistoryElementDto;
 import com.duberlyguarnizo.accountinquireservice.application.request.TransactionsApi;
 import com.duberlyguarnizo.accountinquireservice.application.request.TransactionsApiDelegate;
-import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
 import java.net.URI;
 import java.util.List;
 import java.util.UUID;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 
+
+/**
+ * TransactionDelegateImpl is an implementation of the TransactionsApiDelegate interface.
+ * It provides methods for retrieving transaction balance, transaction history,
+ * and creating transactions.
+ */
 @RequiredArgsConstructor
 @Component
 public class TransactionDelegateImpl implements TransactionsApiDelegate {
   private final RestService service;
 
   /**
-   * GET /transactions/balance/{accountId}
+   * GET /transactions/balance/{accountId}.
    *
    * @param accountId (required)
    * @return Successful Operation (status code 200)
@@ -31,25 +37,26 @@ public class TransactionDelegateImpl implements TransactionsApiDelegate {
    */
   @Override
   public ResponseEntity<TransactionBalanceDto> getBalanceByAccountId(UUID accountId) {
-    //TODO: Check and modify according to Mongo ID format
+    //TODO: Check and modify according to Mongo ID format.
     TransactionBalanceDto balance = service.getBalanceByAccountId(accountId);
     return ResponseEntity.ok(balance);
   }
 
   /**
-   * GET /transactions/history/{accountId}
+   * GET /transactions/history/{accountId}.
    *
    * @param accountId (required)
-   * @return Successful Operation (status code 200)
+   * @return Successful Operation (Http 200)
    * @see TransactionsApi#getAccountTransactionHistory
    */
   @Override
-  public ResponseEntity<List<TransactionHistoryElementDto>> getAccountTransactionHistory(UUID accountId) {
+  public ResponseEntity<List<TransactionHistoryElementDto>> getAccountTransactionHistory(
+          UUID accountId) {
     return ResponseEntity.ok(service.getTransactionHistory(accountId));
   }
 
   /**
-   * POST /transactions
+   * POST /transactions.
    *
    * @param transactionCreationDto (optional)
    * @return Transaction created (status code 201)

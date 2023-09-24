@@ -4,6 +4,9 @@
 
 package com.duberlyguarnizo.accountinquireservice.enums;
 
+/**
+ * Defines the type of client. Regular clients are persons. Corporate clients are companies.
+ */
 public enum ClientType {
   REGULAR,
   CORPORATE
