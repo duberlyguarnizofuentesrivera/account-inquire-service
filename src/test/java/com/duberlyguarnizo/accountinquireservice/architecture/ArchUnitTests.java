@@ -18,7 +18,6 @@ class ArchUnitTests {
   JavaClasses importedClasses = new ClassFileImporter()
           .withImportOption(ImportOption.Predefined.DO_NOT_INCLUDE_TESTS)
           .importPackages("com.duberlyguarnizo.accountinquireservice");
-  ;
 
   @Test
   @DisplayName("Domain Models should not be Entities and should reside in domain")

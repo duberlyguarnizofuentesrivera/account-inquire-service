@@ -40,7 +40,7 @@ public class TransactionDelegateImpl implements TransactionsApiDelegate {
    */
   @Override
   public ResponseEntity<TransactionBalanceDto> getBalanceByAccountId(UUID accountId) {
-    //TODO: Check and modify according to Mongo ID format.
+
     TransactionBalanceDto balance = service.getBalanceByAccountId(accountId);
     return ResponseEntity.ok(balance);
   }
